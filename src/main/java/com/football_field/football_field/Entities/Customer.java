@@ -22,11 +22,9 @@ public class Customer {
     @Column(name = "full_name")
     String fullName;
 
-    @Column(name = "phoneNumber")
-    String phoneNumber;
+    @Column(name = "email")
+    String email;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "field_id",referencedColumnName = "id")
-    FootballPlayground footballPlaygrounds;
-
+    @Column(name = "password")
+    String password;
 }

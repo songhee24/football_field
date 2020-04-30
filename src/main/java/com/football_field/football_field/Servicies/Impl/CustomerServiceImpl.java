@@ -1,11 +1,9 @@
 package com.football_field.football_field.Servicies.Impl;
 
 import com.football_field.football_field.Entities.Customer;
-import com.football_field.football_field.Entities.FootballPlayground;
 import com.football_field.football_field.Repositories.CustomerRepository;
-import com.football_field.football_field.Repositories.FootballFieldRepository;
 import com.football_field.football_field.Servicies.CustomerService;
-import com.football_field.football_field.Servicies.FootballPlaygroundService;
+import com.football_field.football_field.Servicies.FootballFieldService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +14,6 @@ import java.util.Optional;
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
-
-    @Autowired
-    private FootballPlaygroundService footballPlaygroundService;
 
     @Override
     public Customer getById(Long id) {
@@ -38,9 +33,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer createCustomer(Customer customer) {
-        FootballPlayground footballPlayground = footballPlaygroundService.getById(customer.getFootballPlaygrounds().getId());
-        customer.setFootballPlaygrounds(footballPlayground);
-        return save(customer);
+        return customerRepository.save(customer);
     }
 
     @Override

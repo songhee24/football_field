@@ -19,10 +19,13 @@ public class Owner {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @Column(name = "owner_name")
-    String ownerName;
+    @Column(name = "name")
+    String name;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "request_id",referencedColumnName = "id")
-    List<Request> request;
+    @Column(name = "email")
+    String email;
+
+    @Column(name = "password")
+    String password;
+
 }

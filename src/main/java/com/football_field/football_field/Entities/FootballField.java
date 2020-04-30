@@ -1,31 +1,32 @@
 package com.football_field.football_field.Entities;
 
-import com.football_field.football_field.Statuses.Status;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
-import java.util.List;
+import java.math.BigDecimal;
 
 @Entity
-@Table(name = "m_booking")
+@Table(name = "m_football_fields")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Booking {
+public class FootballField {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "request_id",referencedColumnName = "id")
-    List<Request> requests;
+    @Column(name = "address")
+    String address;
 
-    @Column(name = "booking_time")
-    String bookingTime;
+    @Column(name = "cost")
+    BigDecimal cost;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    Owner owner;
 
 }
