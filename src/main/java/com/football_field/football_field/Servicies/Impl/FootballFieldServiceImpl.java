@@ -60,4 +60,9 @@ public class FootballFieldServiceImpl implements FootballFieldService {
     public FootballField save(FootballField item) {
         return footballFieldRepository.save(item);
     }
+
+    @Override
+    public List<FootballField> getAllByOwner_Id(Long id) {
+        return footballFieldRepository.getAllByOwner_Id(id);
+    }
 }

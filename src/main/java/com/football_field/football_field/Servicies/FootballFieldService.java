@@ -10,4 +10,6 @@ public interface FootballFieldService extends BaseService<FootballField> {
     FootballField create(FootballField footballField);
 
     List<FootballFieldNoOwner> getAllWithoutOwner();
+
+    List<FootballField> getAllByOwner_Id(Long id);
 }

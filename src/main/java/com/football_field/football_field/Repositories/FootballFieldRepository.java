@@ -15,4 +15,5 @@ public interface FootballFieldRepository extends JpaRepository<FootballField,Lon
     List<FootballFieldNoOwner> getAllWithoutOwner();
 //    List< list = em.createQuery("SELECT p.field1, p.field2 FROM Entity p").getResultList();
 
+    List<FootballField> getAllByOwner_Id(Long id);
 }
