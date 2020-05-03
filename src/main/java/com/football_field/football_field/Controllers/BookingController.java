@@ -26,7 +26,7 @@ public class BookingController {
 
     @PostMapping("/create")
     public BookedField create(@RequestParam String date, @RequestBody BookedField book
-            , @RequestParam Status status,@RequestParam Long id) {
+            , @RequestParam Status status, @RequestParam Long id) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-M-yyyy-hh:mm");
         try {
             Date newDate = simpleDateFormat.parse(date);
@@ -35,19 +35,31 @@ public class BookingController {
             e.printStackTrace();
         }
 //        dd-M-yyyy hh:mm
-        return bookedFieldService.createBooking(book,status,id);
+        return bookedFieldService.createBooking(book, status, id);
+    }
+
+    @GetMapping("/testo")
+    public void timeTest() {
+        String date = "30-4-2020-19:25";
+        int hours = 2;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-M-yyyy-hh:mm");
+        try {
+            Date newDate = simpleDateFormat.parse(date);
+            newDate.setHours(newDate.getHours() + hours);
+            System.err.println("Time testo: " + newDate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
-
-
     @PostMapping("/save")
-    public BookedField save(@RequestBody BookedField customer){
+    public BookedField save(@RequestBody BookedField customer) {
         return bookedFieldService.save(customer);
     }
 
     @GetMapping("/getAll")
-    public List<BookedField> getAll(){
+    public List<BookedField> getAll() {
         return bookedFieldService.getAll();
     }
 }
