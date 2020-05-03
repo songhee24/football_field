@@ -17,6 +17,12 @@ public class BookingController {
     @Autowired
     private BookedFieldService bookedFieldService;
 
+    //PostMapping
+    //params, model
+    // method {
+    //      1.
+    // }
+
     @PostMapping("/create")
     public BookedField create(@RequestParam String date, @RequestBody BookedField book) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-M-yyyy-hh:mm");
