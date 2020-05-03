@@ -5,30 +5,20 @@ import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Entity
-@Table(name = "m_customers")
+@Table(name = "m_company")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Customer {
+public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @Column(name = "full_name")
-    String fullName;
-
-    @Column(name = "email")
-    String email;
-
-    @Column(name = "password")
-    String password;
-
-    @Column(name = "balance")
-    BigDecimal balance;
+    @Column(name = "score")
+    BigDecimal score;
 }

@@ -4,6 +4,7 @@ package com.football_field.football_field.Controllers;
 import com.football_field.football_field.Entities.BookedField;
 import com.football_field.football_field.Entities.FootballField;
 import com.football_field.football_field.Servicies.BookedFieldService;
+import com.football_field.football_field.Statuses.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class BookingController {
     // }
 
     @PostMapping("/create")
-    public BookedField create(@RequestParam String date, @RequestBody BookedField book) {
+    public BookedField create(@RequestParam String date, @RequestBody BookedField book , @RequestParam Status status,@RequestParam Long id) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-M-yyyy-hh:mm");
         try {
             Date newDate = simpleDateFormat.parse(date);
@@ -33,7 +34,7 @@ public class BookingController {
             e.printStackTrace();
         }
 //        dd-M-yyyy hh:mm
-        return bookedFieldService.createBooking(book);
+        return bookedFieldService.createBooking(book,status,id);
     }
 
     @PostMapping("/save")
