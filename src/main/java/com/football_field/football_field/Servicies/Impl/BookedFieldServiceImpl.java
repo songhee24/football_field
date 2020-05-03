@@ -56,6 +56,11 @@ public class BookedFieldServiceImpl implements BookedFieldService {
     }
 
     @Override
+    public List<BookedField> getAllByFootballField_Id(Long id) {
+        return bookedFieldRepository.getAllByFootballField_Id(id);
+    }
+
+    @Override
     public BookedField save(BookedField item) {
         return bookedFieldRepository.save(item);
     }
