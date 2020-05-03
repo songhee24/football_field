@@ -15,7 +15,7 @@ public class PaymentController {
     private PaymentService paymentService;
 
     @PostMapping
-    public Payment createPayment(@RequestBody Payment payment){
-        return paymentService.createPayment(payment);
+    public Payment createPayment(@RequestBody Payment payment,Long fieldId){
+        return paymentService.createPayment(payment,fieldId);
     }
 }

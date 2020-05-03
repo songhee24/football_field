@@ -25,7 +25,8 @@ public class BookingController {
     // }
 
     @PostMapping("/create")
-    public BookedField create(@RequestParam String date, @RequestBody BookedField book , @RequestParam Status status,@RequestParam Long id) {
+    public BookedField create(@RequestParam String date, @RequestBody BookedField book
+            , @RequestParam Status status,@RequestParam Long id) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-M-yyyy-hh:mm");
         try {
             Date newDate = simpleDateFormat.parse(date);
@@ -36,6 +37,9 @@ public class BookingController {
 //        dd-M-yyyy hh:mm
         return bookedFieldService.createBooking(book,status,id);
     }
+
+
+
 
     @PostMapping("/save")
     public BookedField save(@RequestBody BookedField customer){

@@ -26,13 +26,9 @@ public class Payment {
     @Column(name = "created_date")
     Date createdDate = new Date();
 
-    @Column(name = "amount")
-    BigDecimal amount;
-
     @ManyToOne
     @JoinColumn(name = "account_from_id")
     Customer accountFrom;
-
 
     @ManyToOne
     @JoinColumn(name = "account_to_id")

@@ -14,4 +14,5 @@ public interface FootballFieldRepository extends JpaRepository<FootballField,Lon
     @Query(value = "select ff.id, ff.address, ff.cost from m_football_fields ff", nativeQuery = true)
     List<FootballFieldNoOwner> getAllWithoutOwner();
 //    List< list = em.createQuery("SELECT p.field1, p.field2 FROM Entity p").getResultList();
+
 }
