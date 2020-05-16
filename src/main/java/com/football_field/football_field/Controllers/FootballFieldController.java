@@ -29,13 +29,24 @@ public class FootballFieldController {
         return footballFieldService.create(footballField);
     }
 
+    @CrossOrigin
     @GetMapping("/getAll")
     public List<FootballField> getAll(){
         return footballFieldService.getAll();
     }
 
+    @CrossOrigin
+    @GetMapping("/{id}")
+    public FootballField getById(
+            @PathVariable Long id
+    ){
+        return footballFieldService.getById(id);
+    }
+
+
+    @CrossOrigin
     @GetMapping
-    public List<FootballFieldNoOwner> getFields() {
+    public List<FootballFieldNoOwner> getFieldsWithoutOwner() {
         return footballFieldService.getAllWithoutOwner();
     }
 

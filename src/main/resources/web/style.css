@@ -1,0 +1,29 @@
+body {
+    /*border: 1px solid blue;*/
+}
+div {
+    /*border: 1px solid red;*/
+    margin: 10px;
+    display: block;
+    text-align: center;
+}
+input {
+    width: 100%;
+    margin: 5px;
+}
+.inner {
+    background-color: #EEE;
+    padding: 2% 4% 2% 2%;
+    /* width: 100%; */
+    box-shadow: 5px 5px 15px #333;
+    border-radius: 4px;
+    display: block;
+    width: auto;
+    margin: 20px 20% 20px 20%;
+}
+
+form {
+    display: inline-block;
+}
+
+

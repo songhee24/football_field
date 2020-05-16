@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fields Display (All & Id)</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
+    <script src="index.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<div>
+
+    <div id="id" class="inner">
+        FIND BY ID:
+        <input type="number" placeholder="ID" id="id-value">
+        <button type="button" onclick="restGetFootballFieldById()">
+           Find
+        </button>
+    </div>
+
+    <div id="name" class="inner">
+        CREATE NEW FIELD
+        <input type="text" placeholder="NAME" id="name-value">
+        <button type="button" onclick="restSave(), emptyIdNameField()">
+            Save
+        </button>
+    </div>
+
+    <div id="get_all" class="inner">
+        <button type="button" onclick="restGetAll()">
+            Get All
+        </button>
+        <p class="hello-reaction">Content</p>
+    </div>
+
+</div>
+
+</body>
+</html>
