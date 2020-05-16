@@ -11,10 +11,10 @@ const userAction = async () => {
     console.log(myJson);
     var output = '';
     myJson.forEach(
-        field => output += field.id + ', ' + field.address + ', ' + 'field.cost' + ', ' + 'field.owner.id ' + '<br>'
+        field => output += + field.id + ', ' + field.address + ', ' + field.cost + ', ' + '<br>'
     );
-    // $('#content-field').html(output);
-    // $('#content-field2').html( JSON.stringify( data ) );
+    $('#content-field').html(output);
+    $('#content-field2').html( JSON.stringify( myJson ) );
 };
 //
 // var restGetAll = function () {
