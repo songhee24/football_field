@@ -45,7 +45,7 @@ public class BookingController {
     public void timeTest(@RequestParam Long id) {
         String stringDate = "30-4-2020-19:25";
         int hours = 2;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-M-yyyy-hh:mm");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh:mm");
         try {
             Date startDate = simpleDateFormat.parse(stringDate);
             Date endDate = getDateByHourAdding(startDate, hours);
@@ -65,7 +65,7 @@ public class BookingController {
     }
 
     public Date getDateFromString(String stringDate) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-M-yyyy-hh:mm");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh:mm");
         Date date = null;
         try {
              date = simpleDateFormat.parse(stringDate);
