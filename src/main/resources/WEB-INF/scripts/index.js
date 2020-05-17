@@ -30,7 +30,7 @@ var restGetAll = function () {
             console.log(result);
             var output = '';
             result.forEach(
-                field => output += field.id + ', ' + field.address + ', ' + 'field.cost' + ', ' + 'field.owner.id ' + '<br>'
+                field => output += field.id + ', ' + field.address + ', ' + field.cost + ', ' + field.owner.name + '<br>'
             );
             $(".hello-reaction").html('<h3>' + output +'</h3>');
         },

@@ -47,7 +47,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public Payment createPayment(Payment payment,Long fieldId) {
+    public Payment createPayment(Payment payment, Long fieldId) {
         //TODO change login for status
         payment.setStatus(Status.ACCEPTED);
         //find the customer who wants to book

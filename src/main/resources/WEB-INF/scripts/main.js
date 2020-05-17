@@ -11,8 +11,11 @@ const userAction = async () => {
     console.log(myJson);
     var output = '';
     myJson.forEach(
-        field => output += + field.id + ', ' + field.address + ', ' + field.cost + ', ' + '<br>'
+        field => output +='<div>' + field.id + ', ' +
+            '<a href="bookingPage.html?id=' + field.id + '">' + field.address + '</a>'
+            + ', ' + field.cost + ', ' + '</div><br>'
     );
+    // '<a href="http://localhost:8080/bookingPage.html?id=" + field.id>' + field.address + '</a>';
     $('#content-field').html(output);
     $('#content-field2').html( JSON.stringify( myJson ) );
 };

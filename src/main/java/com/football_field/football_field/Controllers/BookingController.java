@@ -22,14 +22,15 @@ public class BookingController {
     //      1.
     // }
 
+    @CrossOrigin
     @PostMapping("/create")
     public BookedField create(
             @RequestBody BookedField book,
             @RequestParam String date,
             @RequestParam Status status,
-            @RequestParam Long id //customer_id
+            @RequestParam Long accountFromId //customer_id
     ) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-M-yyyy-hh:mm");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh:mm");
         try {
             Date newDate = simpleDateFormat.parse(date);
             book.setBookTime(newDate);
@@ -37,7 +38,7 @@ public class BookingController {
             e.printStackTrace();
         }
 //        dd-M-yyyy hh:mm
-        return bookedFieldService.createBooking(book, status, id);
+        return bookedFieldService.createBooking(book, status, accountFromId);
     }
 
     @GetMapping("/testo")
