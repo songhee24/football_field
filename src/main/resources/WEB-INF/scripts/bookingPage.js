@@ -1,9 +1,9 @@
-var prefix = 'http://localhost:8080/';
+let prefix = 'http://localhost:8080/';
 
-var url = new URL(window.location.href);
-var params = new URLSearchParams(url.search);
+let url = new URL(window.location.href);
+let params = new URLSearchParams(url.search);
 
-var field_id = params.get('id');
+let field_id = params.get('id');
 console.log(field_id);
 
 window.onload = function() {
@@ -13,23 +13,23 @@ window.onload = function() {
 
 let cost = 0;
 
-var bookField = function () {
+let bookField = function () {
 
 
-    var fieldCost = cost;
-    var bookDuration = $("#input-duration").val();
-    var bookDate = $("#input-date").val();
+    let fieldCost = cost;
+    let bookDuration = $("#input-duration").val();
+    let bookDate = $("#input-date").val();
 
 
 
 
     // МЕГА КОСТЫЛЬ!!!
     //DATE PARSE
-    var date_year = bookDate.substr(0,4);
-    var date_month = bookDate.substr(5,2);
-    var date_day = bookDate.substr(8,2);
-    var date_hours = bookDate.substr(11,2);
-    var date_minutes = bookDate.substr(14,2);
+    let date_year = bookDate.substr(0,4);
+    let date_month = bookDate.substr(5,2);
+    let date_day = bookDate.substr(8,2);
+    let date_hours = bookDate.substr(11,2);
+    let date_minutes = bookDate.substr(14,2);
     //----------
 
     console.log(bookDate);
@@ -41,7 +41,7 @@ var bookField = function () {
 
 
     //КОСТЫЛЬ
-    var customer_id = 5; //customer_id
+    let customer_id = 5; //customer_id
 
     $.ajax({
         type: 'POST',
@@ -106,7 +106,7 @@ const getField = async () => {
     cost = myJson.cost;
     // return (input-duration * field.cost = summary_cost) + ' вот столько плати нахуй!э'
 
-    var output = 'Field address: ' + myJson.address +
+    let output = 'Field address: ' + myJson.address +
         '<br>Cost per hour: ' + myJson.cost + ' soms';
 
     // '<a href="http://localhost:8080/bookingPage.html?id=" + field.id>' + field.address + '</a>';

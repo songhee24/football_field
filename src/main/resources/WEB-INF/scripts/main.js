@@ -1,4 +1,4 @@
-var prefix = 'http://localhost:8080/';
+let prefix = 'http://localhost:8080/';
 window.onload = function() {
     console.log('works')
     // restGetAll();
@@ -9,7 +9,7 @@ const userAction = async () => {
     const response = await fetch(prefix + 'football/');
     const myJson = await response.json(); //extract JSON from the http response
     console.log(myJson);
-    var output = '';
+    let output = '';
     myJson.forEach(
         field => output +='<div>' + field.id + ', ' +
             '<a href="bookingPage.html?id=' + field.id + '">' + field.address + '</a>'

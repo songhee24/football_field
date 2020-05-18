@@ -1,6 +1,6 @@
-var prefix = 'http://localhost:8080/';
-var restGetFootballFieldById = function () {
-    var id = $("input#id-value").val();
+let prefix = 'http://localhost:8080/';
+let restGetFootballFieldById = function () {
+    let id = $("input#id-value").val();
     console.log("id: " + id);
 
     $.ajax({
@@ -20,7 +20,7 @@ var restGetFootballFieldById = function () {
         }
     });
 };
-var restGetAll = function () {
+let restGetAll = function () {
     $.ajax({
         type: 'GET',
         url: prefix + 'football/getAll/',
@@ -28,7 +28,7 @@ var restGetAll = function () {
         async: true,
         success: function (result) {
             console.log(result);
-            var output = '';
+            let output = '';
             result.forEach(
                 field => output += field.id + ', ' + field.address + ', ' + field.cost + ', ' + field.owner.name + '<br>'
             );
@@ -43,12 +43,12 @@ var restGetAll = function () {
         }
     });
 };
-var restSave = function () {
+let restSave = function () {
 
-    var name = $("input#name-value").val();
+    let name = $("input#name-value").val();
     console.log('name: ' + name)
 
-    // var city = {};
+    // let city = {};
     // // city.id = null;
     // city.name = name;
     // console.log('TEST_city: ' + JSON.stringify(city))
