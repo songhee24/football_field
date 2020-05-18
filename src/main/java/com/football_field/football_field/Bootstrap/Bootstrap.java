@@ -1,13 +1,17 @@
 package com.football_field.football_field.Bootstrap;
 
+import com.football_field.football_field.Entities.Company;
 import com.football_field.football_field.Entities.User;
 import com.football_field.football_field.Entities.UserRole;
+import com.football_field.football_field.Repositories.CompanyRepository;
 import com.football_field.football_field.Repositories.UserRepository;
 import com.football_field.football_field.Repositories.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.math.BigDecimal;
 
 @Component
 public class Bootstrap implements CommandLineRunner {
@@ -20,6 +24,9 @@ public class Bootstrap implements CommandLineRunner {
 
     @Autowired
     UserRoleRepository userRoleRepository;
+
+    @Autowired
+    CompanyRepository companyRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -55,6 +62,16 @@ public class Bootstrap implements CommandLineRunner {
 
             userRoleRepository.save(adminRole);
             userRoleRepository.save(userRole);
+        }
+
+
+        //
+        Company company = Company.builder()
+                .score(new BigDecimal(1000))
+                .build();
+
+        if (companyRepository.findAll().size() == 0) {
+            companyRepository.save(company);
         }
     }
 
