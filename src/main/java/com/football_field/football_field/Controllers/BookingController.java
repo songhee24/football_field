@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
-@RequestMapping("/Booking")
+@RequestMapping("/booking")
 public class BookingController {
     @Autowired
     private BookedFieldService bookedFieldService;

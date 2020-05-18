@@ -65,7 +65,9 @@ $(document).ready(function(){
                     email: $('#email').val(),
                     password: $('#password').val(),
                     // TODO add the user his wallet
-                    balance: $('#бабки').val()
+                    // balance: $('#бабки').val()
+                    //FIXME можно же ведь сделать так ?
+                    balance: 0
                 }),
                 processData: false,
                 success: function( data, result, textStatus, jQxhr ){
