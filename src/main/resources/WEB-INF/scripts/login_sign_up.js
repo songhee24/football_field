@@ -8,15 +8,16 @@ function validatePassword() {
 
         if (len < 1) {
             alert("Password cannot be blank");
+            return false;
             // Prevent form submission
-            event.preventDefault();
-        }
-
-        if ($('#password').val() !== $('#confirmPassword').val()) {
+            // event.preventDefault();
+        } else if ($('#password').val() !== $('#confirmPassword').val()) {
             alert("Password and Confirm Password don't match");
+            return false;
             // Prevent form submission
-            event.preventDefault();
+            // event.preventDefault();
         }
+    return true;
 };
 
 //хуйня не работает заебался
@@ -61,7 +62,7 @@ $(document).ready(function(){
             console.log('password: ' + password);
             console.log('password confirm: ' + confirmPassword);
 
-            if (password == confirmPassword) {
+            if (validatePassword()) {
                 e.preventDefault();
                 $.ajax({
                     url: prefix + "customer/create",
@@ -94,12 +95,6 @@ $(document).ready(function(){
                         console.log(errorThrown);
                     }
                 });
-            } else {
-                alert("Password confirmation failed!");
-                // $('#username').val(username);
-                // $('#email').val(email);
-                // $('#password').empty();
-                // $('#confirmPassword').empty();
             }
         });
     });
