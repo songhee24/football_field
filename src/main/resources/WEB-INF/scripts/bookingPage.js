@@ -21,6 +21,8 @@ var bookField = function () {
     var bookDate = $("#input-date").val();
 
 
+
+
     // МЕГА КОСТЫЛЬ!!!
     //DATE PARSE
     var date_year = bookDate.substr(0,4);
@@ -39,28 +41,30 @@ var bookField = function () {
 
 
     //КОСТЫЛЬ
-    var customer_id = 7; //company's id
+    var customer_id = 5; //customer_id
 
     $.ajax({
         type: 'POST',
-        url: prefix + 'create?date='
+        url: prefix + 'Booking/create?date='
             + date_day + '-'
             + date_month + '-'
             + date_year + '-'
             + date_hours + ':'
             + date_minutes + '&'
             + 'status=ACCEPTED&'
-            + 'id=' + customer_id,
+            + 'accountFromId=' + customer_id,
         dataType: 'json',
         async: true,
         data: JSON.stringify(
             {
-                customer:
-                    {id:customer_id},
-                footballField:
-                    {id:field_id},
+                customer: {
+                    id:customer_id
+                },
+                footballField: {
+                    id:field_id
+                },
                 bookHours:bookDuration
-            },
+            }
         ),
         headers: {
             //tells my application that it sends it on JSON
@@ -75,6 +79,22 @@ var bookField = function () {
             console.log(jqXHR);
             console.log(textStatus);
             console.log(errorThrown);
+            //just to know wtf is happening
+            console.log("bookDuration: " + bookDuration);
+            console.log("bookDate: " + bookDate);
+            console.log("customer: " + customer_id);
+            console.log("booking date: " +date_day+'-'+date_month+'-'+date_year+'-'+date_hours+':'+date_minutes);
+            console.log("json: " +JSON.stringify(
+                {
+                    customer: {
+                        id:customer_id
+                    },
+                    footballField: {
+                        id:field_id
+                    },
+                    bookHours:bookDuration
+                }
+            ))
         }
     })
 };

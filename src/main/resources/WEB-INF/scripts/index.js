@@ -33,6 +33,7 @@ var restGetAll = function () {
                 field => output += field.id + ', ' + field.address + ', ' + field.cost + ', ' + field.owner.name + '<br>'
             );
             $(".hello-reaction").html('<h3>' + output +'</h3>');
+
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log("ERROR: ");

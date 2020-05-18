@@ -17,13 +17,13 @@ import java.util.List;
 public class FootballFieldController {
     @Autowired
     private FootballFieldService footballFieldService;
-
+    @CrossOrigin
     @PostMapping("/save")
     public FootballField save(@RequestBody FootballField footballField){
         return footballFieldService.save(footballField);
     }
 
-
+    @CrossOrigin
     @PostMapping("/create")
     public FootballField create(@RequestBody FootballField footballField){
         return footballFieldService.create(footballField);
