@@ -53,35 +53,54 @@ function validatePassword() {
 $(document).ready(function(){
     $(function() {
         $('#sub').click(function(e) {
-            e.preventDefault();
-            $.ajax({
-                url: prefix + "customer/create",
-                dataType: 'json',
-                async: true,
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify( {
-                    fullName: $('#username').val(),
-                    email: $('#email').val(),
-                    password: $('#password').val(),
-                    // TODO add the user his wallet
-                    // balance: $('#бабки').val()
-                    //FIXME можно же ведь сделать так ?
-                    balance: 0
-                }),
-                processData: false,
-                success: function( data, result, textStatus, jQxhr ){
-                    console.log(data);
-                    console.log(result);
-                    // $('#response pre').html( JSON.stringify( data ) );
-                },
-                error: function( jqXhr, textStatus, errorThrown ){
-                    console.log("ERROR: ");
-                    console.log(jqXhr);
-                    console.log(textStatus);
-                    console.log(errorThrown);
-                }
-            });
+            var username = $('#username').val();
+            var email = $('#email').val();
+            var password =  $('#password').val();
+            var confirmPassword = $('#confirmPassword').val();
+
+            console.log('password: ' + password);
+            console.log('password confirm: ' + confirmPassword);
+
+            if (password == confirmPassword) {
+                e.preventDefault();
+                $.ajax({
+                    url: prefix + "customer/create",
+                    dataType: 'json',
+                    async: true,
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        fullName: username,
+                        email: email,
+                        password: password,
+                        // TODO add the user his wallet
+                        // balance: $('#бабки').val()
+                        //FIXME можно же ведь сделать так ?
+                        balance: 0
+                    }),
+                    processData: false,
+                    success: function (data, result, textStatus, jQxhr) {
+                        console.log(data);
+                        console.log(result);
+                        if (result == 'success') {
+                            alert("You've been successfully registered");
+                        }
+                        // $('#response pre').html( JSON.stringify( data ) );
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        console.log("ERROR: ");
+                        console.log(jqXhr);
+                        console.log(textStatus);
+                        console.log(errorThrown);
+                    }
+                });
+            } else {
+                alert("Password confirmation failed!");
+                // $('#username').val(username);
+                // $('#email').val(email);
+                // $('#password').empty();
+                // $('#confirmPassword').empty();
+            }
         });
     });
 });
