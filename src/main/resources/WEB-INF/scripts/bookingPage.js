@@ -42,7 +42,6 @@ let bookField = function () {
 
     //КОСТЫЛЬ
     let customer_id = 5; //customer_id
-
     $.ajax({
         type: 'POST',
         url: prefix + 'Booking/create?date='

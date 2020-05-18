@@ -74,10 +74,11 @@ $(document).ready(function(){
                         fullName: username,
                         email: email,
                         password: password,
-                        // TODO add the user his wallet
+                        // TODO add to user his wallet
                         // balance: $('#бабки').val()
                         //FIXME можно же ведь сделать так ?
                         balance: 0
+                        //FIXME вполне. Потом нужно добавить юзеру воображаемый wallet.
                     }),
                     processData: false,
                     success: function (data, result, textStatus, jQxhr) {
