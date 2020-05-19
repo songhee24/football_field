@@ -14,22 +14,17 @@ window.onload = function() {
 let cost = 0;
 
 let bookField = function () {
-
-
     let fieldCost = cost;
     let bookDuration = $("#input-duration").val();
     let bookDate = $("#input-date").val();
 
-
-
-
     // МЕГА КОСТЫЛЬ!!!
     //DATE PARSE
-    let date_year = bookDate.substr(0,4);
-    let date_month = bookDate.substr(5,2);
-    let date_day = bookDate.substr(8,2);
-    let date_hours = bookDate.substr(11,2);
-    let date_minutes = bookDate.substr(14,2);
+    let date_year = bookDate.substr(0, 4);
+    let date_month = bookDate.substr(5, 2);
+    let date_day = bookDate.substr(8, 2);
+    let date_hours = bookDate.substr(11, 2);
+    let date_minutes = bookDate.substr(14, 2);
     //----------
 
     console.log(bookDate);
@@ -43,29 +38,28 @@ let bookField = function () {
     //КОСТЫЛЬ
     let customer_id = 5; //customer_id
 
+
+    //AJAX request for time checking
     $.ajax({
         type: 'POST',
-        url: prefix + 'Booking/create?date='
+        url: prefix + 'booking/chech?date='
             + date_day + '-'
             + date_month + '-'
             + date_year + '-'
             + date_hours + ':'
-            + date_minutes + '&'
-            + 'status=ACCEPTED&'
-            + 'accountFromId=' + customer_id,
+            + date_minutes,
         dataType: 'json',
         async: true,
         data: JSON.stringify(
             {
                 customer: {
-                    id:customer_id
+                    id: customer_id
                 },
                 footballField: {
-                    id:field_id
+                    id: field_id
                 },
-                bookHours:bookDuration
-            }
-        ),
+                bookHours: bookDuration
+            }),
         headers: {
             //tells my application that it sends it on JSON
             'Accept': 'application/json',
@@ -73,6 +67,21 @@ let bookField = function () {
         },
         success: function (result) {
             console.log('LOG_result: ' + result)
+            if (result) {
+                //TODO: href to payment.html
+                window.location.href = 'payment.html?field_id=' + field_id
+                + '&date=' +
+                    + date_day + '-'
+                    + date_month + '-'
+                    + date_year + '-'
+                    + date_hours + ':'
+                    + date_minutes + '&'
+                    + 'field_cost=' + fieldCost + '&'
+                    + 'book_hours=' + bookDuration + '&'
+                    + 'field_address=' + address;
+            } else {
+                alert("This field in this time is already booked!")
+            }
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log("ERROR: ");
@@ -83,27 +92,84 @@ let bookField = function () {
             console.log("bookDuration: " + bookDuration);
             console.log("bookDate: " + bookDate);
             console.log("customer: " + customer_id);
-            console.log("booking date: " +date_day+'-'+date_month+'-'+date_year+'-'+date_hours+':'+date_minutes);
-            console.log("json: " +JSON.stringify(
+            console.log("booking date: " + date_day + '-' + date_month + '-' + date_year + '-' + date_hours + ':' + date_minutes);
+            console.log("json: " + JSON.stringify(
                 {
                     customer: {
-                        id:customer_id
+                        id: customer_id
                     },
                     footballField: {
-                        id:field_id
+                        id: field_id
                     },
-                    bookHours:bookDuration
+                    bookHours: bookDuration
                 }
             ))
         }
-    })
+    });
 };
+
+//     $.ajax({
+//         type: 'POST',
+//         url: prefix + 'booking/create?date='
+//             + date_day + '-'
+//             + date_month + '-'
+//             + date_year + '-'
+//             + date_hours + ':'
+//             + date_minutes + '&'
+//             + 'status=ACCEPTED&'
+//             + 'accountFromId=' + customer_id,
+//         dataType: 'json',
+//         async: true,
+//         data: JSON.stringify(
+//             {
+//                 customer: {
+//                     id:customer_id
+//                 },
+//                 footballField: {
+//                     id:field_id
+//                 },
+//                 bookHours:bookDuration
+//             }
+//         ),
+//         headers: {
+//             //tells my application that it sends it on JSON
+//             'Accept': 'application/json',
+//             'Content-Type': 'application/json'
+//         },
+//         success: function (result) {
+//             console.log('LOG_result: ' + result)
+//         },
+//         error: function (jqXHR, textStatus, errorThrown) {
+//             console.log("ERROR: ");
+//             console.log(jqXHR);
+//             console.log(textStatus);
+//             console.log(errorThrown);
+//             //just to know wtf is happening
+//             console.log("bookDuration: " + bookDuration);
+//             console.log("bookDate: " + bookDate);
+//             console.log("customer: " + customer_id);
+//             console.log("booking date: " +date_day+'-'+date_month+'-'+date_year+'-'+date_hours+':'+date_minutes);
+//             console.log("json: " +JSON.stringify(
+//                 {
+//                     customer: {
+//                         id:customer_id
+//                     },
+//                     footballField: {
+//                         id:field_id
+//                     },
+//                     bookHours:bookDuration
+//                 }
+//             ))
+//         }
+//     })
+// };
 
 const getField = async () => {
     const response = await fetch(prefix + 'football/' + field_id);
     const myJson = await response.json(); //extract JSON from the http response
     console.log(myJson);
     cost = myJson.cost;
+    address = myJson.address
     // return (input-duration * field.cost = summary_cost) + ' вот столько плати нахуй!э'
 
     let output = 'Field address: ' + myJson.address +

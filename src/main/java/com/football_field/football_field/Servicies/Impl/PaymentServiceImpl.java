@@ -13,6 +13,7 @@ import com.football_field.football_field.Statuses.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,12 +43,13 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public Payment findPaymentByStatusAndAccountFrom_Id(Status status,Long id) {
-        return paymentRepository.findPaymentByStatusAndAccountFrom_Id(status,id);
+    public Payment findPaymentByStatusAndAccountFrom_Id(Status status,Long customer_id) {
+        return paymentRepository.findPaymentByStatusAndAccountFrom_Id(status, customer_id);
     }
 
+
     @Override
-    public Payment createPayment(Payment payment, Long fieldId) {
+    public Payment createPayment(Payment payment, Long fieldId, int book_hours) {
         //TODO change login for status
         payment.setStatus(Status.ACCEPTED);
         //find the customer who wants to book
@@ -55,11 +57,11 @@ public class PaymentServiceImpl implements PaymentService {
         //find the field that i wanna to book
         FootballField footballField = footballFieldService.getById(fieldId);
         //Customer paying
-        customer.setBalance(customer.getBalance().subtract(footballField.getCost()));
+        customer.setBalance(customer.getBalance().subtract(footballField.getCost().multiply(new BigDecimal(book_hours))));
         //We'he got money
         Company company = companyService.getById(payment.getAccountTo().getId());
         //Changed our wallet(put customer's money)
-        company.setScore(company.getScore().add(footballField.getCost()));
+        company.setScore(company.getScore().add(footballField.getCost().multiply(new BigDecimal(book_hours))));
         //saving
         payment.setAccountFrom(customer);
         payment.setAccountTo(company);

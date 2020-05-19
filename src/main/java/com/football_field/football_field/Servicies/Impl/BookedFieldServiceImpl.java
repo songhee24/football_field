@@ -14,6 +14,7 @@ import com.football_field.football_field.Statuses.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,15 +45,17 @@ public class BookedFieldServiceImpl implements BookedFieldService {
 
     @Override
     public BookedField createBooking(BookedField bookedField, Status status,Long id) {
-        Payment payment = paymentService.findPaymentByStatusAndAccountFrom_Id(status, id);
-        if (payment.getStatus() == Status.ACCEPTED){
-            Customer customer = customerService.getById(payment.getAccountFrom().getId());
-            FootballField field = footballFieldService.getById(bookedField.getFootballField().getId());
-            bookedField.setCustomer(customer);
-            bookedField.setFootballField(field);
-            return save(bookedField);
-        }
-        else return null;
+        //TESTME
+        System.err.println("LOG_BookFieldServiceImpl: date validation passed");
+            Payment payment = paymentService.findPaymentByStatusAndAccountFrom_Id(status, id);
+            if (payment.getStatus() == Status.ACCEPTED) {
+                Customer customer = customerService.getById(payment.getAccountFrom().getId());
+                FootballField field = footballFieldService.getById(bookedField.getFootballField().getId());
+                bookedField.setCustomer(customer);
+                bookedField.setFootballField(field);
+                return save(bookedField);
+            }
+            return null;
     }
 
     @Override
@@ -63,5 +66,54 @@ public class BookedFieldServiceImpl implements BookedFieldService {
     @Override
     public BookedField save(BookedField item) {
         return bookedFieldRepository.save(item);
+    }
+
+    @Override
+    public boolean isCurrentDateIsFree(Long fieldId, Date startDate, int hours) {
+        Date endDate = getDateByHourAdding(startDate, hours);
+
+        List<BookedField> fields = bookedFieldRepository.getAllByFootballField_Id(fieldId);
+        for (BookedField field : fields) {
+            if (!isDatesNotEqual(
+                    startDate,
+                    endDate,
+                    field.getBookTime(),
+                    getDateByHourAdding(field.getBookTime(), field.getBookHours())
+            )) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isDatesNotEqual(
+            //input dates
+            Date startDate1,
+            Date endDate1,
+            //dates of existing bookings
+            Date startDate2,
+            Date endDate2
+    ) {
+        if (
+            // <<
+                (startDate1.compareTo(startDate2) < 0) && (endDate1.compareTo(startDate2) <= 0)
+                        // >>
+                        || (startDate1.compareTo(endDate2) >= 0) && (endDate1.compareTo(endDate2) > 0)
+
+            //possible easier option
+            /*
+             * endDate1.ct(startDate2) <= 0 or startDate1.ct(endDate2) >= 0
+             *
+             * */
+        ) {
+            return true;
+        }
+        return false;
+    }
+
+    public Date getDateByHourAdding(Date date, int hours) {
+        Date newDate = (Date)date.clone();
+        newDate.setHours(newDate.getHours() + hours);
+        return newDate;
     }
 }

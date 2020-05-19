@@ -38,31 +38,50 @@ public class BookingController {
             e.printStackTrace();
         }
 //        dd-M-yyyy hh:mm
+
         return bookedFieldService.createBooking(book, status, accountFromId);
     }
 
-    @GetMapping("/testo")
-    public void timeTest(@RequestParam Long id) {
-        String stringDate = "30-4-2020-19:25";
-        int hours = 2;
+    @CrossOrigin
+    @PostMapping("/chech")
+    public boolean checkAvailability(
+            @RequestBody BookedField book,
+            @RequestParam String date
+    ) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh:mm");
         try {
-            Date startDate = simpleDateFormat.parse(stringDate);
-            Date endDate = getDateByHourAdding(startDate, hours);
-            System.err.println("StartDate: " + startDate);
-            System.err.println("EndDate: " + endDate);
-            System.err.println("is Old smaller: " + startDate.compareTo(endDate));
+            Date newDate = simpleDateFormat.parse(date);
+            book.setBookTime(newDate);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        LinkedHashMap<Date, Integer> map = new LinkedHashMap<>();
-        List<BookedField> fields = bookedFieldService.getAllByFootballField_Id(id);
-        for (BookedField field : fields) {
-            map.put(field.getBookTime(), field.getBookHours());
-            System.out.println("field.getBookTime() = " + field.getBookTime());
-            System.out.println("field.getBookHours() = " + field.getBookHours());
-        }
+//        dd-M-yyyy hh:mm
+
+        return bookedFieldService.isCurrentDateIsFree(book.getFootballField().getId(), book.getBookTime(), book.getBookHours());
     }
+
+//    @GetMapping("/testo")
+//    public void timeTest(@RequestParam Long id) {
+//        String stringDate = "30-4-2020-19:25";
+//        int hours = 2;
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh:mm");
+//        try {
+//            Date startDate = simpleDateFormat.parse(stringDate);
+//            Date endDate = getDateByHourAdding(startDate, hours);
+//            System.err.println("StartDate: " + startDate);
+//            System.err.println("EndDate: " + endDate);
+//            System.err.println("is Old smaller: " + startDate.compareTo(endDate));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        LinkedHashMap<Date, Integer> map = new LinkedHashMap<>();
+//        List<BookedField> fields = bookedFieldService.getAllByFootballField_Id(id);
+//        for (BookedField field : fields) {
+//            map.put(field.getBookTime(), field.getBookHours());
+//            System.out.println("field.getBookTime() = " + field.getBookTime());
+//            System.out.println("field.getBookHours() = " + field.getBookHours());
+//        }
+//    }
 
     public Date getDateFromString(String stringDate) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh:mm");
@@ -81,63 +100,24 @@ public class BookingController {
             @RequestParam int hours,
             @RequestParam Long fieldId
     ) {
-        Date startDate = getDateFromString(date);
-
-        System.out.println("isDateFree = " + isCurrentDateIsFree(
-                fieldId,
-                startDate,
-                hours
-        ));
+//        Date startDate = getDateFromString(date);
+//
+//        System.out.println("isDateFree = " + bookedFieldService.isCurrentDateIsFree(
+//                fieldId,
+//                startDate,
+//                hours
+//        ));
 
     }
 
-    public boolean isCurrentDateIsFree(Long fieldId, Date startDate, int hours) {
-        Date endDate = getDateByHourAdding(startDate, hours);
+//    button -> if(!isCurrentFree) {
+//        alert(zanyato)
+//    } else {
+//        href = 'payment' if (payment -> success) -> createBooking(args)...
+//    }
 
-        List<BookedField> fields = bookedFieldService.getAllByFootballField_Id(fieldId);
-        for (BookedField field : fields) {
-            if (!isDatesNotEqual(
-                    startDate,
-                    endDate,
-                    field.getBookTime(),
-                    getDateByHourAdding(field.getBookTime(), field.getBookHours())
-            )) {
-                return false;
-            }
-        }
-        return true;
-    }
 
-    public boolean isDatesNotEqual(
-            //input dates
-            Date startDate1,
-            Date endDate1,
-            //dates of existing bookings
-            Date startDate2,
-            Date endDate2
-    ) {
-        if (
-                // <<
-                (startDate1.compareTo(startDate2) < 0) && (endDate1.compareTo(startDate2) <= 0)
-                // >>
-                || (startDate1.compareTo(endDate2) >= 0) && (endDate1.compareTo(endDate2) > 0)
 
-                //possible easier option
-                /*
-                * endDate1.ct(startDate2) <= 0 or startDate1.ct(endDate2) >= 0
-                *
-                * */
-        ) {
-            return true;
-        }
-        return false;
-    }
-
-    public Date getDateByHourAdding(Date date, int hours) {
-        Date newDate = (Date)date.clone();
-        newDate.setHours(newDate.getHours() + hours);
-        return newDate;
-    }
 
 //    date =>   start
 //    newDate => end
