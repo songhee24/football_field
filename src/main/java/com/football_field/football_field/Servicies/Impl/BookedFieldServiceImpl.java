@@ -45,10 +45,13 @@ public class BookedFieldServiceImpl implements BookedFieldService {
 
     @Override
     public BookedField createBooking(BookedField bookedField, Status status, Long id) {
-        //TESTME где сейчас проходит валидация по дате ?
+        //TESTME где сейчас проходит валидация по дате ? (на уровне JS проходит)
         //TESTME сейчас валидации по дате при создании брони нету!
         //TESTME ошибка возникет в findPayemnt.. потому, что неправильный findPayment..
-        System.err.println("LOG_BookFieldServiceImpl: date validation passed");
+
+        if (isCurrentDateIsFree(bookedField.getFootballField().getId(), bookedField.getBookTime(), bookedField.getBookHours())) {
+
+            System.err.println("LOG_BookFieldServiceImpl: date validation passed");
 //        Payment payment = paymentService.findPaymentByStatusAndAccountFrom_Id(status, id);
 //        System.err.println("Creating Booking->payment: " + payment.toString());
 //        if (payment.getStatus() == Status.ACCEPTED) {
@@ -59,7 +62,8 @@ public class BookedFieldServiceImpl implements BookedFieldService {
             bookedField.setFootballField(field);
             return save(bookedField);
 //        }
-//        return null;
+        }
+        return null;
     }
 
     @Override

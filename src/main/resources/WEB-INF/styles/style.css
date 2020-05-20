@@ -10,6 +10,11 @@ body {
     font-family: sans-serif;
 }
 
+.hide-text {
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+}
 
 /*.inner {*/
 /*    background-color: #EEE;*/

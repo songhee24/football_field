@@ -11,4 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface PaymentRepository extends JpaRepository<Payment,Long> {
     Payment findPaymentByStatusAndAccountFrom_Id(Status status, Long id);
 
+    Payment findPaymentByStatusAndCreatedDateAndAccountFrom();
+
 }

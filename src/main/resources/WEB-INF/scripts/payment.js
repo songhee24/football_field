@@ -10,7 +10,7 @@ let book_date = params.get('date');
 let book_duration = params.get('book_hours');
 let payment_status = 'ACCEPTED';
 
-let customer_id = 11;
+let customer_id = 11; // потом будем брать это значение из активной сессии
 let company_id = 13;
 
 
@@ -42,6 +42,7 @@ let make_pay = function () {
             'Content-Type': 'application/json'
         },
         success: function (result) {
+            //TODO пока нету действия на пустой баланс
             console.log('LOG_make_pay->result: ' + result.toString());
             alert('payment is successful!')
             //call create booking
