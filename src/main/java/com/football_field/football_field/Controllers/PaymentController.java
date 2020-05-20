@@ -11,6 +11,7 @@ public class PaymentController {
     @Autowired
     private PaymentService paymentService;
 
+    @CrossOrigin
     @PostMapping
     public Payment createPayment(
             @RequestBody Payment payment,

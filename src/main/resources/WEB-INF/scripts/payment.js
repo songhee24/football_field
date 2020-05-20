@@ -29,8 +29,8 @@ let make_pay = function () {
         async: true,
         data: JSON.stringify(
             {
-                accountFrom: 11, //richest_customer
-                accountTo: 13, //company_id
+                accountFrom: {id: 11}, //richest_customer
+                accountTo: {id: 13}, //company_id
                 status: 'ACCEPTED'
             }),
         headers: {
