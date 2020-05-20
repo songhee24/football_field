@@ -44,18 +44,22 @@ public class BookedFieldServiceImpl implements BookedFieldService {
     }
 
     @Override
-    public BookedField createBooking(BookedField bookedField, Status status,Long id) {
-        //TESTME
+    public BookedField createBooking(BookedField bookedField, Status status, Long id) {
+        //TESTME где сейчас проходит валидация по дате ?
+        //TESTME сейчас валидации по дате при создании брони нету!
+        //TESTME ошибка возникет в findPayemnt.. потому, что неправильный findPayment..
         System.err.println("LOG_BookFieldServiceImpl: date validation passed");
-            Payment payment = paymentService.findPaymentByStatusAndAccountFrom_Id(status, id);
-            if (payment.getStatus() == Status.ACCEPTED) {
-                Customer customer = customerService.getById(payment.getAccountFrom().getId());
-                FootballField field = footballFieldService.getById(bookedField.getFootballField().getId());
-                bookedField.setCustomer(customer);
-                bookedField.setFootballField(field);
-                return save(bookedField);
-            }
-            return null;
+//        Payment payment = paymentService.findPaymentByStatusAndAccountFrom_Id(status, id);
+//        System.err.println("Creating Booking->payment: " + payment.toString());
+//        if (payment.getStatus() == Status.ACCEPTED) {
+//            Customer customer = customerService.getById(payment.getAccountFrom().getId());
+            Customer customer = customerService.getById(id);
+            FootballField field = footballFieldService.getById(bookedField.getFootballField().getId());
+            bookedField.setCustomer(customer);
+            bookedField.setFootballField(field);
+            return save(bookedField);
+//        }
+//        return null;
     }
 
     @Override
@@ -112,7 +116,7 @@ public class BookedFieldServiceImpl implements BookedFieldService {
     }
 
     public Date getDateByHourAdding(Date date, int hours) {
-        Date newDate = (Date)date.clone();
+        Date newDate = (Date) date.clone();
         newDate.setHours(newDate.getHours() + hours);
         return newDate;
     }
