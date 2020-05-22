@@ -19,8 +19,8 @@ public class Owner {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @Column(name = "name")
-    String name;
+    @Column(name = "user_name")
+    String username;
 
     @Column(name = "email")
     String email;

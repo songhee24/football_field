@@ -20,8 +20,8 @@ public class BookedField {
     Long id;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    Customer customer; // show only id
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    User user; // show only id
 
     @ManyToOne
     @JoinColumn(name = "field_id", referencedColumnName = "id")

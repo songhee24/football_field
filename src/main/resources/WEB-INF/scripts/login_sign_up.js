@@ -84,7 +84,7 @@ $(document).ready(function(){
                     success: function (data, result, textStatus, jQxhr) {
                         console.log(data);
                         console.log(result);
-                        if (result == 'success') {
+                        if (result === 'success') {
                             alert("You've been successfully registered");
                         }
                         // $('#response pre').html( JSON.stringify( data ) );

@@ -1,13 +1,11 @@
 package com.football_field.football_field.Servicies.Impl;
 
 import com.football_field.football_field.Entities.BookedField;
-import com.football_field.football_field.Entities.Customer;
 import com.football_field.football_field.Entities.FootballField;
-import com.football_field.football_field.Entities.Payment;
+import com.football_field.football_field.Entities.User;
 import com.football_field.football_field.Repositories.BookedFieldRepository;
-import com.football_field.football_field.Repositories.CustomerRepository;
 import com.football_field.football_field.Servicies.BookedFieldService;
-import com.football_field.football_field.Servicies.CustomerService;
+import com.football_field.football_field.Servicies.UserService;
 import com.football_field.football_field.Servicies.FootballFieldService;
 import com.football_field.football_field.Servicies.PaymentService;
 import com.football_field.football_field.Statuses.Status;
@@ -24,7 +22,7 @@ public class BookedFieldServiceImpl implements BookedFieldService {
     private BookedFieldRepository bookedFieldRepository;
 
     @Autowired
-    private CustomerService customerService;
+    private UserService userService;
 
     @Autowired
     private FootballFieldService footballFieldService;
@@ -56,9 +54,9 @@ public class BookedFieldServiceImpl implements BookedFieldService {
 //        System.err.println("Creating Booking->payment: " + payment.toString());
 //        if (payment.getStatus() == Status.ACCEPTED) {
 //            Customer customer = customerService.getById(payment.getAccountFrom().getId());
-            Customer customer = customerService.getById(id);
+            User user = userService.getById(id);
             FootballField field = footballFieldService.getById(bookedField.getFootballField().getId());
-            bookedField.setCustomer(customer);
+            bookedField.setUser(user);
             bookedField.setFootballField(field);
             return save(bookedField);
 //        }

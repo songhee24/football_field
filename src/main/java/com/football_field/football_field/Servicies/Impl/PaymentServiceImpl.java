@@ -1,12 +1,12 @@
 package com.football_field.football_field.Servicies.Impl;
 
 import com.football_field.football_field.Entities.Company;
-import com.football_field.football_field.Entities.Customer;
 import com.football_field.football_field.Entities.FootballField;
 import com.football_field.football_field.Entities.Payment;
+import com.football_field.football_field.Entities.User;
 import com.football_field.football_field.Repositories.PaymentRepository;
 import com.football_field.football_field.Servicies.CompanyService;
-import com.football_field.football_field.Servicies.CustomerService;
+import com.football_field.football_field.Servicies.UserService;
 import com.football_field.football_field.Servicies.FootballFieldService;
 import com.football_field.football_field.Servicies.PaymentService;
 import com.football_field.football_field.Statuses.Status;
@@ -23,7 +23,7 @@ public class PaymentServiceImpl implements PaymentService {
     private PaymentRepository paymentRepository;
 
     @Autowired
-    private CustomerService customerService;
+    private UserService userService;
 
     @Autowired
     private CompanyService companyService;
@@ -53,11 +53,11 @@ public class PaymentServiceImpl implements PaymentService {
         //TODO change login for status
         payment.setStatus(Status.ACCEPTED);
         //find the customer who wants to book
-        Customer customer = customerService.getById(payment.getAccountFrom().getId());
+        User customer = userService.getById(payment.getAccountFrom().getId());
         //find the field that i wanna to book
         FootballField footballField = footballFieldService.getById(fieldId);
         //Customer paying
-        customer.setBalance(customer.getBalance().subtract(footballField.getCost().multiply(new BigDecimal(book_hours))));
+//        customer.setBalance(customer.getBalance().subtract(footballField.getCost().multiply(new BigDecimal(book_hours))));
         //We'he got money
         Company company = companyService.getById(payment.getAccountTo().getId());
         //Changed our wallet(put customer's money)

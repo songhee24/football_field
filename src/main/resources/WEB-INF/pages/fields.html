@@ -14,9 +14,37 @@
 
 <!--<div  class="container">-->
 <!--        <div  class="box" >-->
-           <div id="content-field" class="cards">
 
+           <div id="content-field" class="cards">
            </div>
+<!--          <script type="text/javascript">
+
+              let counter = 0;
+              console.log("elements on page "+cards)
+
+              createDiv = function(){
+                  let div = document.createElement('div');
+                  div.setAttribute("id","content-field"+counter);
+                  return div;
+              }
+
+
+              createDiv = function () {
+                  if (cards === 0){
+                      let div = document.createElement('div');
+                      div.setAttribute("id","content-field"+counter);
+                      $('#content-field' + counter).html(output);
+                      console.log("elements on page "+cards)
+                  } else if (cards > 3){
+                      counter++;
+                      console.log(counter);
+                      $('#content-field' + counter).html(output);
+                      console.log($('#content-field'+counter).html(output));
+                  }
+              };
+          </script>-->
+
+
 <!--        </div>-->
 <!--    </div>-->
 

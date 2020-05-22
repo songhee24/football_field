@@ -1,8 +1,12 @@
 package com.football_field.football_field.Config;
 
+import com.football_field.football_field.Servicies.Impl.UserServiceImpl;
+import com.football_field.football_field.Servicies.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,28 +26,44 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
+    @Autowired
+    private UserServiceImpl userService;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.jdbcAuthentication()
+//                .dataSource(dataSource)
+//                .usersByUsernameQuery("select user_name, password, is_active from m_user where user_name = ?")
+//                //важен порядок получаемых колонок
+//                .authoritiesByUsernameQuery("select u.user_name, ur.role_name " +
+//                        "from m_user as u inner join m_user_roles as ur on ur.user_id = u.id " +
+//                        "where u.username = ?");
+//                  //вместо * вставить нужные поля
+//    }
+
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
-                .dataSource(dataSource)
-                .usersByUsernameQuery("select login, password, is_active from users where login = ?")
-                //важен порядок получаемых колонок
-                .authoritiesByUsernameQuery("select u.login, ur.role_name " +
-                        "from users as u inner join user_roles as ur on ur.user_id = u.id " +
-                        "where u.login = ?");
-        //вместо * вставить нужные поля
+        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/testAdmin").hasRole("ADMIN") // checks like this ROLE_ADMIN
+//                .antMatchers(HttpMethod.POST,"/user/create").permitAll() // checks like this ROLE_ADMIN
                 .antMatchers("/testUser").hasRole("USER")   // it adds ROLE_ tiself
                 .and().httpBasic().and().csrf().disable();
     }
+
 }
