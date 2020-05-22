@@ -29,13 +29,13 @@ public class FootballFieldController {
         return footballFieldService.create(footballField);
     }
 
-    @CrossOrigin
+    //TODO этот метод не должен существовать (vulnerability)
     @GetMapping("/getAll")
     public List<FootballField> getAll(){
         return footballFieldService.getAll();
     }
 
-    @CrossOrigin
+    //TODO этот метод не должен существовать (vulnerability)
     @GetMapping("/{id}")
     public FootballField getById(
             @PathVariable Long id
@@ -50,8 +50,9 @@ public class FootballFieldController {
         return footballFieldService.getAllWithoutOwner();
     }
 
-    @GetMapping("/owner")
-    public List<FootballField> getFieldsByOwner(@RequestParam Long id) {
+    @CrossOrigin
+    @GetMapping("/getByOwnerId/{id}")
+    public List<FootballFieldNoOwner> getFieldsByOwnerId(@PathVariable Long id) {
         return footballFieldService.getAllByOwner_Id(id);
     }
 }

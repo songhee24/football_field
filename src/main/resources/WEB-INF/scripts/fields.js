@@ -1,5 +1,5 @@
 let prefix = 'http://localhost:8080/';
-window.onload = function() {
+window.onload = function () {
     console.log('works');
     // restGetAll();
     userAction();
@@ -15,18 +15,20 @@ const userAction = async () => {
         //TODO Can't find(understand) a template engine(Шаблонизатор) (ʘ‿ʘ)-fuck I spent three fucking hours
         field =>
             output +=
-            // ((counter % 3 === 0)? '<hr>':'') +
-            '<div class="container">'
-                + '<div class="box">'
-                    + '<div class="content">'
-                            +'<h7>'+ field.id + '</h7>'
-                            + '<h3>'+ field.address +'</h3>' + '<p>'
-                            + field.cost + '</p>' + ''
-                        +'<a href="bookingPage.html?id=' + field.id + '">select</a>'
-                    + '</div>'
+                // ((counter % 3 === 0)? '<hr>':'') +
+                +'<div class="inner">'
+                // +'<div class="container">'
+                //     + '<div class="box">'
+                //         + '<div class="content">'
+                + '<h7>' + field.id + '</h7>'
+                + '<h3>' + field.address + '</h3>' + '<p>'
+                + field.cost + '</p>' + ''
+                + '<a href="bookingPage.html?id=' + field.id + '">select</a>'
                 + '</div>'
-            + '</div>'
-                // + '<span class="hide-text">' + (counter++) + '</span>'
+        //     + '</div>'
+        // + '</div>'
+        //  +  '</div>'
+        // + '<span class="hide-text">' + (counter++) + '</span>'
 
     );
     $('#content-field').html(output);
@@ -35,7 +37,7 @@ const userAction = async () => {
     //check how much field's div
     cards = $('.container').length;
 
-    console.log(JSON.stringify( myJson ) );
+    console.log(JSON.stringify(myJson));
     // $('#content-field2').html( JSON.stringify( myJson ) );
 };
 

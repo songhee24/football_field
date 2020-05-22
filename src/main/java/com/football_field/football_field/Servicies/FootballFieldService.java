@@ -11,5 +11,7 @@ public interface FootballFieldService extends BaseService<FootballField> {
 
     List<FootballFieldNoOwner> getAllWithoutOwner();
 
-    List<FootballField> getAllByOwner_Id(Long id);
+    List<FootballFieldNoOwner> getAllByOwner_Id(Long id);
+
+    FootballFieldNoOwner getByIdNoOwner(Long id);
 }
