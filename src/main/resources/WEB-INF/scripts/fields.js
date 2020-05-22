@@ -14,8 +14,8 @@ const userAction = async () => {
     myJson.forEach(
         //TODO Can't find(understand) a template engine(Шаблонизатор) (ʘ‿ʘ)-fuck I spent three fucking hours
         field =>
-            output
-            +=
+            output +=
+            // ((counter % 3 === 0)? '<hr>':'') +
             '<div class="container">'
                 + '<div class="box">'
                     + '<div class="content">'
@@ -26,6 +26,8 @@ const userAction = async () => {
                     + '</div>'
                 + '</div>'
             + '</div>'
+                // + '<span class="hide-text">' + (counter++) + '</span>'
+
     );
     $('#content-field').html(output);
     //<a href="bookingPage.html?id=' + field.id + '">select</a>

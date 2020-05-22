@@ -2,6 +2,7 @@ package com.football_field.football_field.Servicies.Impl;
 
 import com.football_field.football_field.Entities.Roles.Role;
 import com.football_field.football_field.Entities.User;
+import com.football_field.football_field.Entities.Wallet;
 import com.football_field.football_field.Repositories.RoleRepository;
 import com.football_field.football_field.Repositories.UserRepository;
 import com.football_field.football_field.Servicies.RoleService;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -45,6 +47,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public User createUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));// пароль шифруем
+
+        user.setWallet(
+                Wallet.builder().balance(new BigDecimal(0)).build()
+        );
+
         Set<Role> roles = new HashSet<>();
         roles.add(roleService.getOne(1L)); //добавляем роль
         user.setRoles(roles);

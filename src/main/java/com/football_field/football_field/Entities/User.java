@@ -37,6 +37,11 @@ public class User implements UserDetails {
     @Column(name = "is_active")
     int isActive;
 
+    @NotNull
+    @OneToOne
+    @JoinColumn(name = "wallet_id", referencedColumnName = "id")
+    Wallet wallet;
+
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
     @JoinTable(
