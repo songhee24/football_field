@@ -6,20 +6,35 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
     <script src="../scripts/bookingPage.js"></script>
     <link href="../styles/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="../styles/bookingPage.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
 
-<div class="inner">
+<script>
+    $( function() {
+        $( "#input-date" ).datepicker();
+    } );
+</script>
+
+<div class="date-box">
     <div id="content-field">
     </div>
-    <div>
-        <input type="datetime-local" id="input-date" value="">
-        Book hours: <input type="number" id="input-duration" value="1">
-        <button onclick="bookField()">
-            Book this field
-        </button>
+    <div class="date-box2">
+        <label for="input-date" class="form__label">book date</label>
+        <input class="form__input" id="input-date" value="">
+        <label for="input-duration" class="form__label">book hours</label>
+        <input  class="form__input" type="number" id="input-duration" value="1">
+        <div class="button_cont" align="center">
+            <a class="example_d" href="#" onclick="bookField()" target="_blank" rel="nofollow noopener">
+                Add Call to Action</a>
+        </div>
     </div>
 </div>
+
+
 
 </body>
 </html>
