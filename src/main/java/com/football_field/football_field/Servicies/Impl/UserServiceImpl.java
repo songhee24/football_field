@@ -5,8 +5,8 @@ import com.football_field.football_field.Entities.User;
 import com.football_field.football_field.Entities.Wallet;
 import com.football_field.football_field.Repositories.RoleRepository;
 import com.football_field.football_field.Repositories.UserRepository;
-import com.football_field.football_field.Servicies.RoleService;
 import com.football_field.football_field.Servicies.UserService;
+import com.football_field.football_field.side_models.LoginUserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -42,11 +42,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public Boolean createUser(User user) {
+    public User createUser(User user) {
         User userFromBD = findByUserName(user.getUsername());
 
         if (userFromBD != null){
-            return false;
+            System.out.println("username already have");
+            return null;
         }
 
         Role role = roleService.save(Role.builder().id(1L).roleName("ROLE_USER").build());
@@ -54,8 +55,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setRoles(Collections.singleton(role));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setWallet(wallet);
-        save(user);
-        return true;
+
+        return save(user);
+    }
+
+    @Override
+    public User login(LoginUserModel loginUserModel) {
+        User userFromBD = findByUserName(loginUserModel.getUserName());
+        System.out.println("user from bd "+ userFromBD);
+         if (userFromBD == null){
+             return null;
+         }
+        return userFromBD;
     }
 
     @Override

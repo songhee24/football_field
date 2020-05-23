@@ -17,16 +17,17 @@
         <form  action="" class="login-form">
             <h1>Login</h1>
             <div class="txtb">
-                <input type="text"  required>
+                <input id="login-username" type="text"  required>
                 <span data-placholder="Username"></span>
             </div>
 
             <div class="txtb">
-                <input type="password" required >
+                <input id="login-password" type="password" required >
                 <span data-placholder="Password"></span>
             </div>
 
-            <input type="submit" class="logbtn" value="login">
+            <input type="submit" class="logbtn" value="login" id="sub2">
+<!--            <a href="navbar.html"><input type="submit" class="logbtn" value="login"></a>-->
 
             <div class="bottom-text">
                 <p class="change_link">
@@ -92,6 +93,10 @@
                         $(this).removeClass("focus");
                 });
                 /*==============================================*/
+                /*==============================================*/
+                /*==============================================*/
+                /*==============================================*/
+                /*==============================================*/
                 $(".login-form").hide();
                 // $(".register-form").hide();
                 $(".to-login").click(function () {
@@ -106,6 +111,15 @@
                 $(".to-signup").click(function () {
                     $(".signup-form").show();
                     $(".login-form").hide();
+                });
+                /*==============================================*/
+                /*==============================================*/
+                /*==============================================*/
+                /*==============================================*/
+                /*==============================================*/
+                $(".logbtn2").click(function () {
+                    $(".signup-form").hide();
+                    $(".login-form").show();
                 });
 
             </script>

@@ -2,7 +2,10 @@ package com.football_field.football_field.Controllers;
 
 import com.football_field.football_field.Entities.User;
 import com.football_field.football_field.Servicies.UserService;
+import com.football_field.football_field.side_models.LoginUserModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,8 +23,31 @@ public class UserController {
 
     @CrossOrigin
     @PostMapping("/create")
-    public Boolean create(@RequestBody User User){
-        return userService.createUser(User);
+    public ResponseEntity<User> create(@RequestBody User User){
+        User user =  userService.createUser(User);
+        try {
+            if (user != null){
+                 return new ResponseEntity<>(HttpStatus.ALREADY_REPORTED);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(user,HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @PostMapping("/login")
+    public ResponseEntity<User> login(@RequestBody LoginUserModel loginUserModel){
+        User user = userService.login(loginUserModel);
+        try {
+            if (user == null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(user,HttpStatus.OK);
     }
 
     @GetMapping("/getAll")

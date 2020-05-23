@@ -17,7 +17,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-
+@ToString
 @Entity
 @Table(name = "m_user")
 public class User implements UserDetails {

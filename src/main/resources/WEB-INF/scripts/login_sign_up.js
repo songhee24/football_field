@@ -1,4 +1,4 @@
-let prefix = "http://localhost:8080/";
+let prefix = "http://localhost:8080/user/";
 
 
 function validatePassword() {
@@ -54,10 +54,10 @@ function validatePassword() {
 $(document).ready(function(){
     $(function() {
         $('#sub').click(function(e) {
-            var username = $('#username').val();
-            var email = $('#email').val();
-            var password =  $('#password').val();
-            var confirmPassword = $('#confirmPassword').val();
+            let username = $('#username').val();
+            let email = $('#email').val();
+            let password =  $('#password').val();
+            let confirmPassword = $('#confirmPassword').val();
 
             console.log('password: ' + password);
             console.log('password confirm: ' + confirmPassword);
@@ -65,20 +65,72 @@ $(document).ready(function(){
             if (validatePassword()) {
                 e.preventDefault();
                 $.ajax({
-                    url: prefix + "customer/create",
+                    url: prefix + "create",
                     dataType: 'json',
                     async: true,
                     type: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify({
-                        fullName: username,
+                        userName: username,
                         email: email,
                         password: password,
+                        confirmPassword:confirmPassword
                         // TODO add to user his wallet
                         // balance: $('#бабки').val()
                         //FIXME можно же ведь сделать так ?
-                        balance: 0
+                        // balance: 0
                         //FIXME вполне. Потом нужно добавить юзеру воображаемый wallet.
+                    }),
+                    processData: false,
+                    success: function (data, result, textStatus, jQxhr) {
+                        console.log("data "+ JSON.stringify(data));
+                            if (result === 'success') {
+                            alert("You've been successfully registered");
+                        }
+                        // $('#response pre').html( JSON.stringify( data ) );
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        console.log("ERROR: ");
+                        console.log(jqXhr);
+                        console.log(textStatus);
+                        console.log(errorThrown);
+                    }
+                });
+            }
+        });
+    });
+});
+
+//=================================================================
+//=================================================================
+//=================================================================
+//=================================================================
+//=================================================================
+//=================================================================
+//=================================================================
+
+
+$(document).ready(function(){
+    $(function() {
+        $('#sub2').click(function(e) {
+            let login_username = $('#login-username').val();
+            let login_password =  $('#login-password').val();
+
+            console.log('login : ' + login_username);
+            console.log('confirm: ' + login_password);
+
+            if (validatePassword()) {
+                e.preventDefault();
+                $.ajax({
+                    url: prefix + "login",
+                    dataType: 'json',
+                    async: true,
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        userName: login_username,
+                        password: login_password,
+
                     }),
                     processData: false,
                     success: function (data, result, textStatus, jQxhr) {

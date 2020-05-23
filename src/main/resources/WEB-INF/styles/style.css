@@ -1,15 +1,15 @@
 /*AZAMAT'S*/
-/*body {*/
-/*    !*border: 1px solid blue;*!*/
-/*    background-image:linear-gradient(120deg,#16a085,#2ecc71);*/
-/*    margin: 0;*/
-/*    padding: 0;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    min-height: 100vh;*/
-/*    font-family: sans-serif;*/
-/*}*/
+body {
+    /*border: 1px solid blue;*/
+    background-image:linear-gradient(120deg,#16a085,#2ecc71);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: sans-serif;
+}
 
 /*.hide-text {*/
 /*    text-indent: 100%;*/
