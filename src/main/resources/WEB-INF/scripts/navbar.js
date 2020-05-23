@@ -9,7 +9,7 @@ window.onload = function () {
 };
 
 let goToFields = function () {
-    window.location.href = 'fields.html'
+    window.location.href = 'fields.html?userId=' + userId;
 };
 
 let goToAddField = function () {

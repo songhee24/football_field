@@ -1,9 +1,15 @@
 let prefix = 'http://localhost:8080/';
+
+let url = new URL(window.location.href);
+let params = new URLSearchParams(url.search);
+
 window.onload = function () {
     console.log('works');
     // restGetAll();
     userAction();
 };
+
+let userId = params.get('userId');
 
 const userAction = async () => {
     const response = await fetch(prefix + 'football/');
@@ -23,7 +29,7 @@ const userAction = async () => {
                 + '<h7>' + field.id + '</h7>'
                 + '<h3>' + field.address + '</h3>' + '<p>'
                 + field.cost + '</p>' + ''
-                + '<a href="bookingPage.html?id=' + field.id + '">select</a>'
+                + '<a href="bookingPage.html?id=' + field.id + '&userId=' + userId + '">select</a>'
                 + '</div>'
         //     + '</div>'
         // + '</div>'
