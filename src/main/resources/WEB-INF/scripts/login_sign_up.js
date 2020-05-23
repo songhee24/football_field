@@ -101,19 +101,28 @@ $(document).ready(function(){
                     success: function (data, result, textStatus, jQxhr) {
                         console.log("data "+ JSON.stringify(data));
                             if (result === 'success') {
-                                muser_id = data.id;
                                 $.ajax({
-                                    url: prefix + "create",
+                                    url: ownerPrefix,
                                     dataType: 'json',
                                     async: true,
                                     type: 'POST',
                                     contentType: 'application/json',
                                     data: JSON.stringify({
-                                        userName: username,
-                                        email: email,
-                                        password: password,
-                                        confirmPassword: confirmPassword
+                                        id: data.id,
+                                        name:data.username,
+                                        email:data.email,
+                                        password:data.password
+
                                     }),
+                                    success: function (data, result, textStatus, jQxhr) {
+                                        alert("ocSuccess: " + data.id);
+                                    },
+                                    error: function (jqXhr, textStatus, errorThrown) {
+                                        console.log("ERROR: ");
+                                        console.log(jqXhr);
+                                        console.log(textStatus);
+                                        console.log(errorThrown);
+                                    }
                                 });
                             alert("You've been successfully registered");
 

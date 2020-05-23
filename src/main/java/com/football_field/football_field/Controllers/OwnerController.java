@@ -11,7 +11,7 @@ public class OwnerController {
     @Autowired
     private OwnerService ownerService;
 
-
+    @CrossOrigin
     @PostMapping
     public Owner save(@RequestBody Owner owner){
         return ownerService.save(owner);

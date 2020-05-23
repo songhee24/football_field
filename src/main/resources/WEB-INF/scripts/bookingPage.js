@@ -4,6 +4,7 @@ let url = new URL(window.location.href);
 let params = new URLSearchParams(url.search);
 
 let field_id = params.get('id');
+let userId = params.get('userId');
 console.log(field_id);
 
 window.onload = function() {
@@ -78,7 +79,8 @@ let bookField = function () {
                     + date_minutes + '&'
                     + 'field_cost=' + fieldCost + '&'
                     + 'book_hours=' + bookDuration + '&'
-                    + 'field_address=' + address;
+                    + 'field_address=' + address + '&'
+                    + 'id=' + userId;
             } else {
                 alert("This field in this time is already booked!")
             }

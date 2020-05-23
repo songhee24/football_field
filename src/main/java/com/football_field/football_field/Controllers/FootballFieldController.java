@@ -36,6 +36,7 @@ public class FootballFieldController {
     }
 
     //TODO этот метод не должен существовать (vulnerability)
+    @CrossOrigin
     @GetMapping("/{id}")
     public FootballField getById(
             @PathVariable Long id

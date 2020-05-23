@@ -10,8 +10,8 @@ let book_date = params.get('date');
 let book_duration = params.get('book_hours');
 let payment_status = 'ACCEPTED';
 
-let customer_id = 11; // потом будем брать это значение из активной сессии
-let company_id = 13;
+let customer_id = params.get('id'); // потом будем брать это значение из активной сессии
+let company_id = 1;
 
 
 window.onload = function() {

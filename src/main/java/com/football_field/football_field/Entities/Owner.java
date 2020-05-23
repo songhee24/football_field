@@ -16,7 +16,6 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Owner {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
     @Column(name = "user_name")
