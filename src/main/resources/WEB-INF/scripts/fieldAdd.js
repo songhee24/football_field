@@ -1,9 +1,14 @@
 let prefix = 'http://localhost:8080/';
 
+let url = new URL(window.location.href);
+let params = new URLSearchParams(url.search);
+
+let userId = params.get('id');
+
 let createField = function () {
     let fieldCost = $("#field-cost-id").val();
     let fieldAddress = $("#field-address-id").val();
-    let ownerId = $("#field-ownerId-id").val();
+    let ownerId = userId;
 
     $.ajax({
         type: 'POST',

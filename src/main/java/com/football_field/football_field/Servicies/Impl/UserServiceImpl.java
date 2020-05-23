@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public User getById(Long id) {
-        Optional<User> User= userRepository.findById(id);
+        Optional<User> User = userRepository.findById(id);
         return User.get();
     }
 
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public User createUser(User user) {
         User userFromBD = findByUserName(user.getUsername());
 
-        if (userFromBD != null){
+        if (userFromBD != null) {
             System.out.println("username already have");
             return null;
         }
@@ -63,21 +63,26 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public SignUpUserModel getSignUpModel(String userName) {
         User foundUser = findByUserName(userName);
-        return  SignUpUserModel
-                        .builder()
-                        .id(foundUser.getId())
-                        .userName(foundUser.getUsername())
-                        .build();
+        return SignUpUserModel
+                .builder()
+                .id(foundUser.getId())
+                .userName(foundUser.getUsername())
+                .build();
     }
 
     @Override
     public User login(LoginUserModel loginUserModel) {
         User userFromBD = findByUserName(loginUserModel.getUserName());
-        System.out.println("user from bd "+ userFromBD);
-         if (userFromBD == null){
-             return null;
-         }
-        return userFromBD;
+        System.out.println("LOG_user from bd: " + userFromBD);
+        if (userFromBD == null) {
+            return null;
+        }
+        if (
+                loginUserModel.getPassword().equals(userFromBD.getConfirmPassword())
+        ) {
+            return userFromBD;
+        }
+        return null;
     }
 
     @Override

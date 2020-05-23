@@ -1,4 +1,5 @@
 let prefix = "http://localhost:8080/user/";
+let ownerPrefix = "http://localhost:8080/owner/";
 
 window.onload = function () {
     console.log('works sign');
@@ -10,7 +11,7 @@ window.onload = function () {
 // document.id.value = locate;
 
 
-// let id;
+let id;
 let userNameForModel;
 const signUpAction = async () => {
     const response = await fetch(prefix + 'getByUserName?userName=' + userNameForModel);
@@ -20,6 +21,7 @@ const signUpAction = async () => {
     console.log("model json "+output);
     console.log("take id "+ myJson.id);
      id = myJson.id;
+    window.location.href = 'navbar.html?id=' + id;
 
      function takeId() {
         return myJson.id;
@@ -94,16 +96,25 @@ $(document).ready(function(){
                         email: email,
                         password: password,
                         confirmPassword:confirmPassword
-                        // TODO add to user his wallet
-                        // balance: $('#бабки').val()
-                        //FIXME можно же ведь сделать так ?
-                        // balance: 0
-                        //FIXME вполне. Потом нужно добавить юзеру воображаемый wallet.
                     }),
                     processData: false,
                     success: function (data, result, textStatus, jQxhr) {
                         console.log("data "+ JSON.stringify(data));
                             if (result === 'success') {
+                                muser_id = data.id;
+                                $.ajax({
+                                    url: prefix + "create",
+                                    dataType: 'json',
+                                    async: true,
+                                    type: 'POST',
+                                    contentType: 'application/json',
+                                    data: JSON.stringify({
+                                        userName: username,
+                                        email: email,
+                                        password: password,
+                                        confirmPassword: confirmPassword
+                                    }),
+                                });
                             alert("You've been successfully registered");
 
                         }
@@ -158,7 +169,7 @@ $(document).ready(function(){
                     console.log(data);
                     console.log(result);
                     if (result === 'success') {
-                        console.log(signUpAction());
+                        signUpAction();
                         alert("You've been successfully registered");
 
                     }
