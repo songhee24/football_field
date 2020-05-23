@@ -4,7 +4,7 @@ let params = new URLSearchParams(url.search);
 let userId = params.get('id');
 
 window.onload = function () {
-   alert("works")
+   // alert("works")
     // restGetAll();
 };
 
@@ -14,4 +14,12 @@ let goToFields = function () {
 
 let goToAddField = function () {
     window.location.href = 'fieldAdd.html?id=' + userId;
+};
+
+let goToMyFields = function () {
+    window.location.href = 'showMyFields.html?id=' + userId;
+};
+
+let goToMyWallet = function () {
+    window.location.href = 'Wallet.html?id=' + userId;
 };

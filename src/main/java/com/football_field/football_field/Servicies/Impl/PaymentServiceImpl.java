@@ -57,7 +57,7 @@ public class PaymentServiceImpl implements PaymentService {
         //find the field that i wanna to book
         FootballField footballField = footballFieldService.getById(fieldId);
         //Customer paying
-//        customer.setBalance(customer.getBalance().subtract(footballField.getCost().multiply(new BigDecimal(book_hours))));
+        customer.getWallet().setBalance(customer.getWallet().getBalance().subtract(footballField.getCost().multiply(new BigDecimal(book_hours))));
         //We'he got money
         Company company = companyService.getById(payment.getAccountTo().getId());
         //Changed our wallet(put customer's money)
