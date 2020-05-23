@@ -7,6 +7,7 @@ import com.football_field.football_field.Repositories.RoleRepository;
 import com.football_field.football_field.Repositories.UserRepository;
 import com.football_field.football_field.Servicies.UserService;
 import com.football_field.football_field.side_models.LoginUserModel;
+import com.football_field.football_field.side_models.SignUpUserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -57,6 +58,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setWallet(wallet);
 
         return save(user);
+    }
+
+    @Override
+    public SignUpUserModel getSignUpModel(String userName) {
+        User foundUser = findByUserName(userName);
+        return  SignUpUserModel
+                        .builder()
+                        .id(foundUser.getId())
+                        .userName(foundUser.getUsername())
+                        .build();
     }
 
     @Override
