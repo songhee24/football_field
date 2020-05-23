@@ -60,10 +60,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-//                .antMatchers(HttpMethod.POST,"/user/create").permitAll() // checks like this ROLE_ADMIN
-                .antMatchers("/testUser").hasRole("USER")   // it adds ROLE_ tiself
-                .and().httpBasic().and().csrf().disable();
+        http.httpBasic().and().authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/user/create").permitAll()
+                .antMatchers(HttpMethod.POST,"/user/save").permitAll()
+//                .antMatchers(HttpMethod.POST,"/")
+                .antMatchers("/admin").hasRole("ADMIN")
+                .and().csrf().disable();
+
+
     }
 
 }

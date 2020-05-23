@@ -15,10 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
@@ -31,7 +28,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = getUserByUserName(username);
+        User user = findByUserName(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
@@ -45,22 +42,25 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User createUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));// пароль шифруем
+    public Boolean createUser(User user) {
+        User userFromBD = findByUserName(user.getUsername());
 
-        user.setWallet(
-                Wallet.builder().balance(new BigDecimal(0)).build()
-        );
+        if (userFromBD != null){
+            return false;
+        }
 
-        Set<Role> roles = new HashSet<>();
-        roles.add(roleService.getOne(1L)); //добавляем роль
-        user.setRoles(roles);
-        return save(user);
+        Role role = roleService.save(Role.builder().id(1L).roleName("ROLE_USER").build());
+        Wallet wallet = Wallet.builder().balance(new BigDecimal(0)).build();
+        user.setRoles(Collections.singleton(role));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setWallet(wallet);
+        save(user);
+        return true;
     }
 
     @Override
-    public User getUserByUserName(String userName) {
-        return userRepository.getUserByUserName(userName);
+    public User findByUserName(String userName) {
+        return userRepository.findByUserName(userName);
     }
 
 

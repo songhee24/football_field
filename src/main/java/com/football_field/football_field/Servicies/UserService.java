@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import java.util.List;
 
 public interface UserService extends BaseService<User> {
-    User createUser(User customer);
+    Boolean createUser(User customer);
 
-    User getUserByUserName(String userName);
+    User findByUserName(String userName);
 
 }

@@ -15,13 +15,12 @@ import java.math.BigDecimal;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
 @Entity
-@Table(name = "wallets")
+@Table(name = "m_wallet")
 public class Wallet {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @NotNull
     @Column(name = "balance")
     BigDecimal balance;
 }

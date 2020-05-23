@@ -37,8 +37,7 @@ public class User implements UserDetails {
     @Column(name = "is_active")
     int isActive;
 
-    @NotNull
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "wallet_id", referencedColumnName = "id")
     Wallet wallet;
 

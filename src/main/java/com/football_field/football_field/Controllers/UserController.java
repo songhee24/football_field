@@ -20,7 +20,7 @@ public class UserController {
 
     @CrossOrigin
     @PostMapping("/create")
-    public User create(@RequestBody User User){
+    public Boolean create(@RequestBody User User){
         return userService.createUser(User);
     }
 
