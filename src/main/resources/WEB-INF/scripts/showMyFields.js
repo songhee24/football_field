@@ -1,8 +1,17 @@
 let prefix = 'http://localhost:8080/';
 
+let url = new URL(window.location.href);
+let params = new URLSearchParams(url.search);
+
+let userId = params.get('id');
+
+window.onload = function () {
+    getFieldsByUserId()
+};
+
+
 //заменить на window.onload когда сможем получать userId автоматом
 let getFieldsByUserId = function () {
-    let userId = $('#userId-id').val()
 
     $.ajax({
         type: 'GET',
