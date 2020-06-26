@@ -28,7 +28,7 @@ public class Payment {
 
     @ManyToOne
     @JoinColumn(name = "account_from_id")
-    Customer accountFrom;
+    User accountFrom;
 
     @ManyToOne
     @JoinColumn(name = "account_to_id")

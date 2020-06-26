@@ -19,11 +19,11 @@ public class BookedField {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    Customer customer;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    User user; // show only id
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "field_id", referencedColumnName = "id")
     FootballField footballField;
 

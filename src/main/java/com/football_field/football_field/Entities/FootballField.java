@@ -25,7 +25,7 @@ public class FootballField {
     @Column(name = "cost")
     BigDecimal cost;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
     Owner owner;
 

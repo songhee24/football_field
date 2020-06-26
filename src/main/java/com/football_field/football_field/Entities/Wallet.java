@@ -4,30 +4,22 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.List;
 
-@Entity
-@Table(name = "m_customers")
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Customer {
+
+@Entity
+@Table(name = "m_wallet")
+public class Wallet {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-
-    @Column(name = "full_name")
-    String fullName;
-
-    @Column(name = "email")
-    String email;
-
-    @Column(name = "password")
-    String password;
 
     @Column(name = "balance")
     BigDecimal balance;

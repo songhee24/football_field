@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link rel="stylesheet" href="../styles/login_sign_up.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
+    <!-- validate password plugin   -->
+    <!-- WARNING add only after all jQuery scripts -->
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script src="../scripts/login_sign_up.js"></script>
+</head>
+<body>
+<div class="container-demo">
+    <div id="wrapper">
+    <div id="login" class="animate form">
+        <form  id="myForm" class="login-form">
+            <h1>Login</h1>
+            <div class="txtb">
+                <input id="login-username" type="text"   required>
+                <span data-placholder="Username"></span>
+            </div>
+
+            <div class="txtb">
+                <input id="login-password" type="password" required >
+                <span data-placholder="Password"></span>
+            </div>
+
+<!--            <a href="navbar.html" type="submit" class="logbtn" value="login" id="sub2">login</a>-->
+            <input type="submit" class="logbtn" value="login" id="sub2">
+
+            <div class="bottom-text">
+                <p class="change_link">
+                    Don't have an account ?
+                    <a href="#toregister" class="to-signup">Sign up</a>
+                </p>
+            </div>
+            <!-- For some css animations-->
+            <script>
+                $(".txtb input").on("focus",function () {
+                    $(this).addClass("focus");
+                });
+                $(".txtb input").on("blur",function () {
+                    if ($(this).val() === "")
+                        $(this).removeClass("focus");
+                });
+            </script>
+        </form>
+    </div>
+    <!--  ==================================================== -->
+    <!--  ==================================================== -->
+    <!--  ==================================================== -->
+    <!--  ==================================================== -->
+    <!--  ==================================================== -->
+    <!--  ==================================================== -->
+    <div id="register" class="animate form">
+        <form  action="" class="signup-form" id="signup-form">
+            <h1>Sign up</h1>
+            <div class="txtb2">
+                <input type="text" id="username" name="username">
+                <span data-placholder="Username" ></span>
+            </div>
+
+            <div class="txtb2">
+                <input type="email" id="email">
+                <span data-placholder="Email"></span>
+            </div>
+
+            <div class="txtb2">
+                <input id="password" type="password" >
+                <span data-placholder="Password"></span>
+            </div>
+            <div class="txtb2">
+                <input id="confirmPassword"  type="password" >
+                <span data-placholder="Confirm your password"></span>
+            </div>
+
+            <input type="submit" class="logbtn2" value="registration"  id="sub">
+
+            <div class="bottom-text2">
+                <p class="change_link">
+                    Already  have an account ?
+                    <a href="#tologin" class="to-login">Login</a>
+                </p>
+            </div>
+            <!-- For some css animations-->
+            <script>
+                $(".txtb2 input").on("focus",function () {
+                    $(this).addClass("focus");
+                });
+                $(".txtb2 input").on("blur",function () {
+                    if ($(this).val() === "")
+                        $(this).removeClass("focus");
+                });
+                /*==============================================*/
+                /*==============================================*/
+                /*==============================================*/
+                /*==============================================*/
+                /*==============================================*/
+                $(".login-form").hide();
+                // $(".register-form").hide();
+                $(".to-login").click(function () {
+                    $(".signup-form").animate({
+
+                    })
+                    $(".signup-form").hide();
+                    $(".login-form").show();
+                });
+
+                // $(".register-form").hide();
+                $(".to-signup").click(function () {
+                    $(".signup-form").show();
+                    $(".login-form").hide();
+                });
+                /*==============================================*/
+                /*==============================================*/
+                /*==============================================*/
+                /*==============================================*/
+                /*==============================================*/
+                $(".logbtn2").click(function () {
+                    $(".signup-form").hide();
+                    $(".login-form").show();
+                });
+
+            </script>
+        </form>
+    </div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>
