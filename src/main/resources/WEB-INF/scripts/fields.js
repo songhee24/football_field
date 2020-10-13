@@ -23,17 +23,17 @@ const userAction = async () => {
             output +=
                 // ((counter % 3 === 0)? '<hr>':'') +
                 +'<div class="inner">'
-                // +'<div class="container">'
-                //     + '<div class="box">'
-                //         + '<div class="content">'
+                +'<div class="container">'
+                    + '<div class="box">'
+                        + '<div class="content">'
                 + '<h7>' + field.id + '</h7>'
                 + '<h3>' + field.address + '</h3>' + '<p>'
                 + field.cost + '</p>' + ''
                 + '<a href="bookingPage.html?id=' + field.id + '&userId=' + userId + '">select</a>'
                 + '</div>'
-        //     + '</div>'
-        // + '</div>'
-        //  +  '</div>'
+            + '</div>'
+        + '</div>'
+         +  '</div>'
         // + '<span class="hide-text">' + (counter++) + '</span>'
 
     );

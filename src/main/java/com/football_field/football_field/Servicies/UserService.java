@@ -9,8 +9,8 @@ public interface UserService extends BaseService<User> {
 
     User findByUserName(String userName);
 
-    User login(LoginUserModel loginUserModel);
+/*    User login(LoginUserModel loginUserModel);
 
-    SignUpUserModel getSignUpModel(String userName);
+    SignUpUserModel getSignUpModel(String userName);*/
 
 }

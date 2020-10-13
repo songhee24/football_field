@@ -60,8 +60,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return save(user);
     }
 
-    @Override
-    public SignUpUserModel getSignUpModel(String userName) {
+//FixAfter find best way to login
+/*    @Override
+      public SignUpUserModel getSignUpModel(String userName) {
         User foundUser = findByUserName(userName);
         return SignUpUserModel
                 .builder()
@@ -69,7 +70,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 .userName(foundUser.getUsername())
                 .build();
     }
-
     @Override
     public User login(LoginUserModel loginUserModel) {
         User userFromBD = findByUserName(loginUserModel.getUserName());
@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             return userFromBD;
         }
         return null;
-    }
+    }*/
 
     @Override
     public User findByUserName(String userName) {

@@ -22,9 +22,10 @@ public class UserController {
         return userService.save(User);
     }
 
-    @CrossOrigin
-    @GetMapping("/getByUserName")
-    public ResponseEntity<SignUpUserModel> signUpUserModel(@RequestParam String userName){
+//FixAfter use spring security's methods
+/*   @CrossOrigin
+     @GetMapping("/getByUserName")
+     public ResponseEntity<SignUpUserModel> signUpUserModel(@RequestParam String userName){
         SignUpUserModel signUpUserModel = userService.getSignUpModel(userName);
         try {
             return new ResponseEntity<>(signUpUserModel,HttpStatus.OK);
@@ -32,6 +33,7 @@ public class UserController {
             return new ResponseEntity(e.getMessage(),HttpStatus.NO_CONTENT);
         }
     }
+*/
 
     @CrossOrigin
     @PostMapping("/create")
@@ -47,7 +49,8 @@ public class UserController {
         return new ResponseEntity<>(user,HttpStatus.OK);
     }
 
-    @CrossOrigin
+//FixAfter
+/*    @CrossOrigin
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody LoginUserModel loginUserModel){
         User user = userService.login(loginUserModel);
@@ -58,9 +61,8 @@ public class UserController {
         } catch (Exception e) {
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
-
         return new ResponseEntity<>(user,HttpStatus.OK);
-    }
+    }*/
 
     @GetMapping("/getAll")
     public List<User> getAll(){
